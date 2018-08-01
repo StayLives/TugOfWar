@@ -20,7 +20,7 @@ public class MenuAnimation : MonoBehaviour
     }
 
     public void GoPlay(){
-        SceneManager.LoadScene("TugOfWar");
+        SceneManager.LoadScene("TugOfWar", LoadSceneMode.Single);
         
     }
 	
