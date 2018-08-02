@@ -16,7 +16,7 @@ public class MenuAnimation : MonoBehaviour
     // Use this for initialization
     void Start () {
         startPosition = transform.position;
-        
+        Time.timeScale = 1.0f;
     }
 
     public void GoPlay(){
