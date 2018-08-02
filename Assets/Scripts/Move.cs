@@ -14,8 +14,14 @@ public class Move : MonoBehaviour
     public GameObject winL;
     public GameObject winR;
     public GameObject restartButton;
+    public GameObject exitButton;
+    public GameObject resumeButton;
+    public GameObject pauseButton;
     void Start(){
         restartButton.SetActive(false);
+        exitButton.SetActive(false);
+        resumeButton.SetActive(false);
+        pauseButton.SetActive(true);
     }
 
     void Update(){
@@ -54,6 +60,19 @@ public class Move : MonoBehaviour
 
     public void RestartGame(){
         SceneManager.LoadScene("TugOfWar", LoadSceneMode.Single);
+        Time.timeScale = 1.0f;
+    }
+    public void TogglePause(){
+        Time.timeScale = Mathf.Approximately(Time.timeScale, 0.0f) ? 1.0f : 0.0f;
+        restartButton.SetActive(Time.timeScale != 1.0f);
+        exitButton.SetActive(Time.timeScale != 1.0f);
+        exitButton.SetActive(Time.timeScale != 1.0f);
+        resumeButton.SetActive(Time.timeScale != 1.0f);
+        pauseButton.SetActive(Time.timeScale == 1.0f);
+    }
+
+    public void Exit(){
+        Application.Quit();
     }
     void UpLeft()
     {
