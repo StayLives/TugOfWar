@@ -18,7 +18,6 @@ public class Move : MonoBehaviour
     public GameObject resumeButton;
     public GameObject pauseButton;
     void Start(){
-        Time.timeScale = 1.0f;
         stopGame = false;
         restartButton.SetActive(false);
         exitButton.SetActive(false);
