@@ -33,7 +33,8 @@ public class Move : MonoBehaviour
         if (loser != null && restartButton.activeInHierarchy==false)
         {
             stopGame = true;
-            
+            pauseButton.SetActive(false);
+            exitButton.SetActive(true);
             if ( loser.transform.position.x > 0) { 
             var yourWin = Instantiate(winL, winL.transform.position, Quaternion.identity);
             }
@@ -59,6 +60,7 @@ public class Move : MonoBehaviour
     }
 
     public void RestartGame(){
+        pauseButton.SetActive(true);
         SceneManager.LoadScene("TugOfWar", LoadSceneMode.Single);
         Time.timeScale = 1.0f;
     }
@@ -73,7 +75,7 @@ public class Move : MonoBehaviour
         if (Time.timeScale != 1.0f){
             GetComponent<AudioSource>().Pause();
         }
-        else { GetComponent<AudioSource>().Play();
+        if(Time.timeScale == 1.0f && timer < 4) { GetComponent<AudioSource>().Play();
     }
 }
 
