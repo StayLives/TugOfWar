@@ -27,20 +27,19 @@ public class Move : MonoBehaviour
 
     void Update(){
         loser= GameObject.FindWithTag("Loser");
-
     }
     void FixedUpdate()
     {
-        if (loser != null){
+        if (loser != null && restartButton.activeInHierarchy==false)
+        {
             stopGame = true;
-            if( loser.transform.position.x > 0) { 
+            
+            if ( loser.transform.position.x > 0) { 
             var yourWin = Instantiate(winL, winL.transform.position, Quaternion.identity);
-            Destroy(yourWin,0.2f);
             }
             if (loser.transform.position.x < 0)
             {
                 var yourWin = Instantiate(winR, winR.transform.position, Quaternion.identity);
-                Destroy(yourWin, 0.2f);
             }
             restartButton.SetActive(true);
         }
@@ -63,6 +62,7 @@ public class Move : MonoBehaviour
         SceneManager.LoadScene("TugOfWar", LoadSceneMode.Single);
         Time.timeScale = 1.0f;
     }
+
     public void TogglePause(){
         Time.timeScale = Mathf.Approximately(Time.timeScale, 0.0f) ? 1.0f : 0.0f;
         restartButton.SetActive(Time.timeScale != 1.0f);
@@ -70,7 +70,12 @@ public class Move : MonoBehaviour
         exitButton.SetActive(Time.timeScale != 1.0f);
         resumeButton.SetActive(Time.timeScale != 1.0f);
         pauseButton.SetActive(Time.timeScale == 1.0f);
+        if (Time.timeScale != 1.0f){
+            GetComponent<AudioSource>().Pause();
+        }
+        else { GetComponent<AudioSource>().Play();
     }
+}
 
     public void Exit(){
         Application.Quit();

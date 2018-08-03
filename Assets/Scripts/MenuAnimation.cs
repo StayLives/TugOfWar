@@ -15,6 +15,7 @@ public class MenuAnimation : MonoBehaviour
     bool back = false;
     // Use this for initialization
     void Start () {
+        
         startPosition = transform.position;
     }
 
