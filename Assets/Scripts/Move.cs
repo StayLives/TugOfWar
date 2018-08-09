@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class Move : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Move : MonoBehaviour
     public GameObject Rope;
     private float timer;
     private bool stopGame;
+    public static int adsCount=0;
     private GameObject loser;
     public GameObject winL;
     public GameObject winR;
@@ -18,6 +20,13 @@ public class Move : MonoBehaviour
     public GameObject resumeButton;
     public GameObject pauseButton;
     void Start(){
+        if (Advertisement.isSupported)
+        {
+            Advertisement.Initialize("2721561", false);
+        }
+        else {
+            Debug.Log("Platform is not supported");
+        }
         stopGame = false;
         restartButton.SetActive(false);
         exitButton.SetActive(false);
@@ -32,6 +41,11 @@ public class Move : MonoBehaviour
     {
         if (loser != null && restartButton.activeInHierarchy==false)
         {
+            adsCount++;
+            if (Advertisement.IsReady() && adsCount % 3 == 0)
+            {
+                Advertisement.Show();
+            }
             stopGame = true;
             pauseButton.SetActive(false);
             exitButton.SetActive(true);
@@ -60,6 +74,7 @@ public class Move : MonoBehaviour
     }
 
     public void RestartGame(){
+        
         pauseButton.SetActive(true);
         SceneManager.LoadScene("TugOfWar", LoadSceneMode.Single);
         Time.timeScale = 1.0f;

@@ -1550,7 +1550,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 752385282}
         m_MethodName: GoPlay
         m_Mode: 1
         m_Arguments:
